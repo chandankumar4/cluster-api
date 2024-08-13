@@ -135,14 +135,18 @@ func (d dependenciesProcessor) generateDependencies(previousRelease ref) (string
 }
 
 func (g prEntriesProcessor) generateNoteEntry(p *pr) *notesEntry {
-	entry := &notesEntry{}
-
-	entry.title = trimTitle(p.title)
-
 	var area string
 	if g.addAreaPrefix {
 		area = g.extractArea(p)
 	}
+
+	// skip PR that are assigned to release area
+	//log.Println("area----------->", area)
+	//if area == "Release" {
+	//	return nil
+	//}
+	entry := &notesEntry{}
+	entry.title = trimTitle(p.title)
 
 	switch {
 	case strings.HasPrefix(entry.title, ":sparkles:"), strings.HasPrefix(entry.title, "✨"):
