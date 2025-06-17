@@ -265,7 +265,7 @@ func getReleaseDetails() (releaseDetails, error) {
 	}
 
 	// allow patterns like v1.7.0-beta.0
-	pattern := `^v\d+\.\d+\.\d+-beta\.\d+$`
+	pattern := `^v\d+\.\d+\.\d+-alpha\.\d+$`
 	match, err := regexp.MatchString(pattern, releaseSemVer)
 	if err != nil || !match {
 		return releaseDetails{}, errors.New("release tag must be in format `^v\\d+\\.\\d+\\.\\d+-beta\\.\\d+$` e.g. v1.7.0-beta.0")
@@ -296,7 +296,7 @@ func getReleaseDetails() (releaseDetails, error) {
 
 	majorMinorWithoutPrefixV := fmt.Sprintf("%s.%s", major, minor) // e.g. 1.7 . Note that there is no "v" in the majorMinor
 	releaseTag := fmt.Sprintf("v%s.%s.%s", major, minor, patch)    // e.g. v1.7.0
-	betaTag := fmt.Sprintf("%s%s", releaseTag, "-beta.0")          // e.g. v1.7.0-beta.0
+	betaTag := fmt.Sprintf("%s%s", releaseTag, "-alpha.0")         // e.g. v1.7.0-beta.0
 	releaseLink := fmt.Sprintf("https://github.com/kubernetes-sigs/cluster-api/tree/main/docs/release/releases/release-%s.md#timeline", majorMinorWithoutPrefixV)
 	releaseNotesLink := fmt.Sprintf("https://github.com/kubernetes-sigs/cluster-api/releases/tag/%s", betaTag)
 
